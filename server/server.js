@@ -1,12 +1,20 @@
 // external libs
 const express = require('express');
+const bodyParser = require('body-parser');
 
-// db
-// const { connectToDb, getDb } = require('./src/db');
+// database
+require('./src/db');
+
+// routes
+const router = require('./src/router');
 
 const server = express();
-const PORT = 3000;
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use('/api', router);
 
-server.listen(PORT, (req, res) => console.log('server is launched'));
+const PORT = process.env.PORT | 5000;
+
+server.listen(PORT, (req, res) => console.log(`server is launched at ${PORT}`));
 
 server.get('/', (req, res) => res.send('Hello World!'));

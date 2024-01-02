@@ -1,21 +1,4 @@
-const { MongoClient } = require('mongodb');
+const mongoose = require('mongoose');
 
-const URL = 'mongodb://localhost:27017/bicycleAdmin';
-
-let dbConnection;
-
-module.exports = {
-  connectToDb: (cb) => {
-    MongoClient
-      .connect(URL)
-      .then((client) => {
-        console.log('Connected to MongoDB');
-        dbConnection = client.db();
-        return cb();
-      })
-      .catch((err) => {
-        return cb(err)
-      });
-  },
-  getDb: () => dbConnection,
-}
+mongoose.connect('mongodb://127.0.0.1:27017/bicycleAdmin').then(() => console.log('DB connected'))
+  .catch((err) => console.log(err));

@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css?family=Saira');
+
+.card-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0.5rem 1rem;
+  background: #E8E8E8;
+  border: 2px solid;
+  border-radius: 1rem;
+  font-family: 'Saira', sans-serif;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.card-color {
+  font-weight: 400;
+}
+
+.card-id {
+  color: #717171;
+}
+
+.close-icon {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.card-status {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  font-size: 1.5rem;
+}
+
+.card-select {
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font-size: 1.5rem;
+}
+
+.card-price {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}

@@ -1,0 +1,12 @@
+.main-control {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  padding-left: 0.5rem;
+  padding-top: 1rem;
+  border-left: 1px solid #696969;
+}
+
+.wrapper-add {
+  padding-right: 1rem;
+}
