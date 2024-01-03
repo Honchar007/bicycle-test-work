@@ -57,7 +57,7 @@ const bikeSlice = createSlice({
     builder.addCase(addBike.fulfilled, (state, action) => {
       state.available = action.payload.available;
       state.busy = action.payload.booked;
-      state.averagePrice = action.payload.averagePrice[0].avgPrice.toFixed(2);
+      state.averagePrice = action.payload.averagePrice.toFixed(2);
       state.total += 1;
 
       state.bikes.push(action.payload.bike);
@@ -65,7 +65,7 @@ const bikeSlice = createSlice({
     builder.addCase(removeBike.fulfilled, (state, action) => {
       state.available = action.payload.available;
       state.busy = action.payload.booked;
-      state.averagePrice = action.payload.averagePrice[0].avgPrice.toFixed(2);
+      state.averagePrice = action.payload.averagePrice.toFixed(2);
       state.total -= 1;
 
       state.bikes = state.bikes.filter(bike => bike.id !== action.payload.bike.id);
@@ -84,7 +84,7 @@ const bikeSlice = createSlice({
       state.total = action.payload.total;
       state.available = action.payload.available;
       state.busy = action.payload.booked;
-      state.averagePrice = action.payload.averagePrice[0].avgPrice.toFixed(2);
+      state.averagePrice = action.payload.averagePrice.toFixed(2);
       state.bikes = action.payload.bicycles;
     });
   },

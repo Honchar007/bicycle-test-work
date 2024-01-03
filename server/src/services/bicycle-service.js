@@ -11,7 +11,7 @@ class BicycleService {
           avgPrice: { $avg: '$price' } // Assuming 'price' field
         }
       }
-    ]);
+    ]).then(res => res && res.length > 0 ? res[0].avgPrice : 0);
 
     return {
       available: availableBicycles,
@@ -66,23 +66,14 @@ class BicycleService {
 
   async getBicycles () {
     const totalBicycles = await Bicycle.countDocuments();
-    const availableBicycles = await Bicycle.countDocuments({ status: 'Available' }); // Assuming 'status' field
-    const bookedBicycles = await Bicycle.countDocuments({ status: 'Busy' }); // Assuming 'status' field
-    const averagePrice = await Bicycle.aggregate([
-      {
-        $group: {
-          _id: null,
-          avgPrice: { $avg: '$price' } // Assuming 'price' field
-        }
-      }
-    ]);
+    const { available, booked, averagePrice } = await this.getStats();
 
     const bicycles = await Bicycle.find();
 
     return {
       total: totalBicycles,
-      available: availableBicycles,
-      booked: bookedBicycles,
+      available,
+      booked,
       averagePrice,
       bicycles,
     };
