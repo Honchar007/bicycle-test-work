@@ -10,6 +10,7 @@
 - npm i
 - close terminal
 4. Open two terminals inside app folder
+
    In the first one you should type:
    1. cd client
    2. npm run start
