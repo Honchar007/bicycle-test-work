@@ -5,6 +5,7 @@ const BicycleSchema = new Schema({
   name: { type: String, required: true },
   type: { type: String, required: true },
   color: { type: String, required: true },
+  status: { type: String, default: 'Unavailable' },
   wheelSize: { type: Number, required: true },
   price: { type: Number, required: true },
   description: { type: String, required: true },

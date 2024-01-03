@@ -1,6 +1,25 @@
 const Bicycle = require('../db/models/bicycle-model');
 
 class BicycleService {
+  async getStats () {
+    const availableBicycles = await Bicycle.countDocuments({ status: 'Available' }); // Assuming 'status' field
+    const bookedBicycles = await Bicycle.countDocuments({ status: 'Busy' }); // Assuming 'status' field
+    const averagePrice = await Bicycle.aggregate([
+      {
+        $group: {
+          _id: null,
+          avgPrice: { $avg: '$price' } // Assuming 'price' field
+        }
+      }
+    ]);
+
+    return {
+      available: availableBicycles,
+      booked: bookedBicycles,
+      averagePrice,
+    };
+  }
+
   async add (id, name, type, color, wheelSize, price, description) {
     const existBike = await Bicycle.findOne({ id: 'id' });
 
@@ -19,27 +38,36 @@ class BicycleService {
         return console.error(error);
       });
 
-    return bike;
+    const stats = await this.getStats();
+
+    return { bike, ...stats };
   }
 
   async delete (id) {
-    const bike = await Bicycle.findByIdAndDelete(id);
-    return bike;
+    const bike = await Bicycle.findOneAndDelete({ id });
+    const stats = await this.getStats();
+    return { bike, ...stats };
   }
 
-  async updateBikeStatus (id, status) {
+  async updateBikeStatus (id, newStatus) {
     const updatedBike = await Bicycle.findOneAndUpdate(
       { id },
-      { $set: { status } },
-      { new: true }
+      {
+        $set: { status: newStatus }
+      },
+      { new: true },
     );
-    return updatedBike;
+
+    const availableBicycles = await Bicycle.countDocuments({ status: 'Available' });
+    const bookedBicycles = await Bicycle.countDocuments({ status: 'Busy' });
+
+    return { updatedBike, booked: bookedBicycles, available: availableBicycles };
   }
 
   async getBicycles () {
     const totalBicycles = await Bicycle.countDocuments();
-    const availableBicycles = await Bicycle.countDocuments({ status: 'available' }); // Assuming 'status' field
-    const bookedBicycles = await Bicycle.countDocuments({ status: 'booked' }); // Assuming 'status' field
+    const availableBicycles = await Bicycle.countDocuments({ status: 'Available' }); // Assuming 'status' field
+    const bookedBicycles = await Bicycle.countDocuments({ status: 'Busy' }); // Assuming 'status' field
     const averagePrice = await Bicycle.aggregate([
       {
         $group: {

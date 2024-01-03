@@ -5,7 +5,7 @@ const validateBikeData = require('../middlewares/validation');
 const router = new Router()
 
 router.post('/add-bike', validateBikeData, bicycleController.add);
-router.post('/remove', bicycleController.remove);
+router.delete('/remove/:id', bicycleController.remove);
 router.patch('/bicycles/:id/status', bicycleController.updateBikeStatus);
 router.get('/bicycles', bicycleController.getBicycles);
 
