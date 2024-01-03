@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styles from './Statistics.module.css';
 import { selectAvailable, selectAvg, selectBooked, selectTotal } from '../../store/bike';
 

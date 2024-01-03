@@ -22,16 +22,15 @@ export default function AdminPanel() {
   return (
     <main className={styles['main-container']}>
       <div className={styles['card-list']}>
-        { bikes && bikes.map((el, index) => 
+        { bikes && bikes.map((el) =>
         <BikeCard
-          key={index}
+          key={el.id}
           name={el.name}
           color={el.color}
           price={el.price}
           status={el.status}
           id={el.id}
         />)}
-        <BikeCard name='Mountain' color='Yellow' />
       </div>
       <EditAdmin />
     </main>

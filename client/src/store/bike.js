@@ -58,7 +58,6 @@ const bikeSlice = createSlice({
       state.available = action.payload.available;
       state.busy = action.payload.booked;
       state.averagePrice = action.payload.averagePrice[0].avgPrice.toFixed(2);
-      console.log(action.payload);
       state.total += 1;
 
       state.bikes.push(action.payload.bike);
